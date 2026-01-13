@@ -82,7 +82,7 @@ export default function QuickLookup(props: LaunchProps<{ arguments: QuickLookupA
       return result;
     },
     [ticker],
-    { keepPreviousData: false }
+    { keepPreviousData: false },
   );
 
   if (error) {

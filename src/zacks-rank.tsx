@@ -33,7 +33,7 @@ export function StockDetail({ ticker, name }: { ticker: string; name: string }) 
       return result;
     },
     [ticker],
-    { keepPreviousData: false }
+    { keepPreviousData: false },
   );
 
   if (error) {
@@ -105,7 +105,10 @@ function StockMetadata({ data }: { data: ZacksQuoteData }) {
 
       <Detail.Metadata.Label title="Previous Close" text={formatCurrency(data.previous_close)} />
       <Detail.Metadata.Label title="Open" text={formatCurrency(data.SUNGARD_OPEN)} />
-      <Detail.Metadata.Label title="Bid / Ask" text={`${formatCurrency(data.SUNGARD_BID)} / ${formatCurrency(data.SUNGARD_ASK)}`} />
+      <Detail.Metadata.Label
+        title="Bid / Ask"
+        text={`${formatCurrency(data.SUNGARD_BID)} / ${formatCurrency(data.SUNGARD_ASK)}`}
+      />
 
       <Detail.Metadata.Separator />
 
@@ -153,7 +156,7 @@ export default function SearchZacksRank() {
       return searchTickers(query);
     },
     [searchText],
-    { keepPreviousData: true }
+    { keepPreviousData: true },
   );
 
   return (
@@ -192,9 +195,17 @@ export default function SearchZacksRank() {
           ))}
         </List.Section>
       ) : searchText.length > 0 && !isLoading ? (
-        <List.EmptyView title="No Results" description={`No tickers found for "${searchText}"`} icon={Icon.MagnifyingGlass} />
+        <List.EmptyView
+          title="No Results"
+          description={`No tickers found for "${searchText}"`}
+          icon={Icon.MagnifyingGlass}
+        />
       ) : (
-        <List.EmptyView title="Search for a Stock" description="Type a ticker symbol or company name" icon={Icon.MagnifyingGlass} />
+        <List.EmptyView
+          title="Search for a Stock"
+          description="Type a ticker symbol or company name"
+          icon={Icon.MagnifyingGlass}
+        />
       )}
     </List>
   );

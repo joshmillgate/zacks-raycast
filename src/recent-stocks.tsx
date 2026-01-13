@@ -78,7 +78,7 @@ export default function RecentStocks() {
         } catch {
           return { ...recent, zacksData: null };
         }
-      })
+      }),
     );
 
     return recentsWithData;
