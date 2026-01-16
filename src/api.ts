@@ -16,22 +16,6 @@ interface YahooSearchResponse {
   quotes: YahooQuote[];
 }
 
-
-export async function getZacksData(ticker: string): Promise<ZacksQuoteData | null> {
-  try {
-    const response = await fetch(`${ZACKS_QUOTE_BASE}?t=${encodeURIComponent(ticker.toUpperCase())}`);
-    if (!response.ok) {
-      throw new Error(`Zacks API failed: ${response.status}`);
-    }
-    const data: ZacksApiResponse = await response.json();
-    const tickerData = data[ticker.toUpperCase()];
-    return tickerData || null;
-  } catch (error) {
-    console.error("Zacks API error:", error);
-    return null;
-  }
-}
-
 // Helper to format the Zacks rank with color
 export function getZacksRankColor(rank: string): string {
   switch (rank) {
@@ -105,4 +89,3 @@ export function useZacksData(ticker: string) {
     },
   });
 }
-

@@ -1,19 +1,8 @@
-import { Action, ActionPanel, Detail, LocalStorage } from "@raycast/api";
+import { Action, ActionPanel, Detail } from "@raycast/api";
 import { useEffect } from "react";
 import { useZacksData, getZacksRankColor, formatCurrency, formatPercent, formatNumber } from "../api";
-import { RecentTicker, ZacksQuoteData } from "../types";
-
-const RECENTS_KEY = "recent-tickers";
-const MAX_RECENTS = 10;
-
-export async function addToRecents(symbol: string, name: string) {
-  const stored = await LocalStorage.getItem<string>(RECENTS_KEY);
-  const recents: RecentTicker[] = stored ? JSON.parse(stored) : [];
-  const filtered = recents.filter((r) => r.symbol !== symbol);
-  filtered.unshift({ symbol, name, timestamp: Date.now() });
-  const trimmed = filtered.slice(0, MAX_RECENTS);
-  await LocalStorage.setItem(RECENTS_KEY, JSON.stringify(trimmed));
-}
+import { addToRecents } from "../recents";
+import { ZacksQuoteData } from "../types";
 
 function generateMarkdown(data: ZacksQuoteData): string {
   const change = parseFloat(data.net_change);
